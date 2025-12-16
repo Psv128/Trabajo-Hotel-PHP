@@ -1,0 +1,13 @@
+{
+  "nombre":"Juan",
+  "apellido1":"Rodriguez",
+  "apellido2":"Manolo",
+  "dni":"77777777H",
+  "telefono":"248204284",
+  "edad":"61",
+  "fecha_entrada":"2003-03-03",
+  "fecha_salida":"2004-04-04",
+  "precio":"7",
+  "empresa":"Trivago",
+  "num_habitaciones":"77"
+}
