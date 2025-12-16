@@ -236,6 +236,8 @@ body{
 .banner-inner{
     display:flex;
     text-align:center;
+    padding: 2%;
+    flex-direction: column;
 }
 
 .banner-inner h2{
