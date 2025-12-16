@@ -255,7 +255,7 @@ body{
     float:left;
     width:25%;
     padding:8px;
-    background-color: rgb(51, 51, 51)
+    /* background-color: rgb(51, 51, 51) */
 }
 
 .footer-col h4{
