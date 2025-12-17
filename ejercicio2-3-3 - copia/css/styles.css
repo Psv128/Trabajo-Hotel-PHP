@@ -29,6 +29,8 @@ body{
     border-bottom:2px solid #eee;
     width:100%;
     overflow:hidden; /* Contener floats */
+    margin-bottom: -20px;
+    margin-top: -10px;
 }
 
 .logo{
@@ -51,6 +53,7 @@ body{
 
 .nav{
     float:right;
+    margin-top: 15px;
 }
 
 .nav button{
@@ -86,12 +89,21 @@ body{
 }
 
 .col.left{ width:55%; }
-.col.right{ width:45%; text-align:center; }
+.col.right{
+    width:45%;
+    text-align:center;
+
+}
+.col.right img {
+  box-shadow: 22px 22px 12px rgba(0, 0, 0, 0.4);
+
+}
+
 
 
 /* HERO ----------------------------------------------------------- */
 .hero{
-    background:linear-gradient(90deg,#ffffff 45%, #f3e8ff 100%);
+    background:linear-gradient(90deg,#d4f6ff 25%, #8fabf7 100%  );              
 }
 
 .hero h1{
@@ -124,6 +136,7 @@ body{
     border:1px solid #aaa;
     padding:8px 14px;
     border-radius:8px;
+    justify-self: start;
 }
 
 
