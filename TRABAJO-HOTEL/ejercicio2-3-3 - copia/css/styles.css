@@ -1,0 +1,305 @@
+/* RESET ---------------------------------------------------------- */
+*{ margin:0; padding:0; box-sizing:border-box; }
+
+body{
+    font-family:'Poppins', sans-serif;
+    background:#fff;
+}
+
+/* COLORES -------------------------------------------------------- */
+:root{
+    --morado:#3977ff;
+    --morado-claro:#cdb3ff;
+}
+
+/* CONTENEDOR CENTRAL --------------------------------------------- */
+.content-wrapper{
+    width:90%;
+    max-width:1300px;
+    margin:0 auto;
+}
+
+/* PAGE ----------------------------------------------------------- */
+.page{ width:100%; }
+
+
+/* HEADER --------------------------------------------------------- */
+.site-header{
+    padding:24px 0;
+    border-bottom:2px solid #eee;
+    width:100%;
+    overflow:hidden; /* Contener floats */
+    margin-bottom: -20px;
+    margin-top: -10px;
+}
+
+.logo{
+    float:left;
+    font-size:22px;
+    font-weight:700;
+    color:var(--morado);
+    margin-right:12px;
+}
+
+.badge{
+    float:left;
+    background:var(--morado);
+    color:white;
+    padding:4px 10px;
+    border-radius:12px;
+    font-size:12px;
+    margin-top:3px;
+}
+
+.nav{
+    float:right;
+    margin-top: 15px;
+}
+
+.nav button{
+    float:left;
+    padding:10px 16px;
+    margin-left:8px;
+    border:1px solid var(--morado);
+    background:white;
+    color:var(--morado);
+    border-radius:20px;
+    cursor:pointer;
+    font-size:14px;
+}
+
+.cta-btn{ background:var(--morado); color:#fff; }
+
+
+/* SECCIONES GENERALES ------------------------------------------- */
+.row{
+    padding:60px 0;
+    border-bottom:2px solid #eee;
+}
+
+.row-inner::after{
+    content:"";
+    display:table;
+    clear:both;
+}
+
+/* COLUMNAS SIN FLEX --------------------------------------------- */
+.col{
+    float:left;
+}
+
+.col.left{ width:55%; }
+.col.right{
+    width:45%;
+    text-align:center;
+
+}
+.col.right img {
+  box-shadow: 22px 22px 12px rgba(0, 0, 0, 0.4);
+
+}
+
+
+
+/* HERO ----------------------------------------------------------- */
+.hero{
+    background:linear-gradient(90deg,#d4f6ff 25%, #8fabf7 100%  );              
+}
+
+.hero h1{
+    font-size:48px;
+    color:#222;
+    font-weight:700;
+}
+
+.hero-desc{
+    margin:16px 0 24px;
+    font-size:16px;
+    color:#444;
+    width:80%;
+}
+
+.btn-primary{
+    padding:12px 22px;
+    background:var(--morado);
+    color:#fff;
+    border:none;
+    border-radius:6px;
+    cursor:pointer;
+    font-size:16px;
+}
+
+.store-box{ margin-top:20px; }
+.store{
+    margin-top:10px;
+    display:flex;
+    border:1px solid #aaa;
+    padding:8px 14px;
+    border-radius:8px;
+    justify-self: start;
+}
+
+
+/* STEPS ---------------------------------------------------------- */
+.steps h2{
+    font-size:28px;
+    color:var(--morado);
+    margin-bottom:20px;
+}
+
+.steps-list li{
+    margin-bottom:18px;
+    color:#222;
+    font-size:16px;
+}
+
+
+/* CTA EN RECUADRO ------------------------------------------------ */
+.boxed-section{
+    background:#f7f7f7;
+    border:none;
+}
+
+.cta-inner{
+    background:#f2f2f2;
+    border-radius:18px;
+    padding:50px;
+    width:100%;
+    overflow:hidden; /* Contener floats */
+}
+
+.cta-left{
+    float:left;
+    width:55%;
+}
+
+.cta-right{
+    float:left;
+    width:45%;
+    text-align:center;
+}
+
+.benefits-img{
+    width:100%;
+    height:260px;
+    background:linear-gradient(180deg,#fff,var(--morado));
+    border-radius:16px;
+}
+
+.cta-center h2{
+    font-size:42px;
+    color:var(--morado);
+}
+
+.cta-center h3{
+    font-size:22px;
+    margin-top:8px;
+}
+
+
+/* BLOG ----------------------------------------------------------- */
+.blog-title{
+    font-size:30px;
+    color:var(--morado);
+}
+
+.blog-sub{
+    margin:10px 0 30px;
+}
+
+.cards-row{ overflow:hidden; }
+
+.card-item{
+    float:left;
+    width:30%;
+    margin-right:3.3%;
+    background:white;
+    border-radius:8px;
+    box-shadow:0 2px 6px rgba(0,0,0,0.1);
+}
+
+.card-item:last-child{ margin-right:0; }
+
+.media{
+    height:160px;
+    background:linear-gradient(135deg,#eee,var(--morado-claro));
+    border-radius:8px 8px 0 0;
+}
+
+.card-text{
+    padding:18px;
+}
+
+.btn-link{
+    background:none;
+    color:var(--morado);
+    border:none;
+    margin-top:8px;
+    cursor:pointer;
+    font-size:14px;
+}
+
+
+/* CTA FINAL ------------------------------------------------------ */
+.cta-banner{
+    text-align:center;
+    background:linear-gradient(90deg,#fff,#f7eaff);
+}
+
+.banner-inner{
+    display:flex;
+    text-align:center;
+    padding: 2%;
+    flex-direction: column;
+}
+
+.banner-inner h2{
+    font-size:34px;
+    margin-bottom:8px;
+}
+
+
+/* FOOTER --------------------------------------------------------- */
+.footer-grid{ background:white; }
+
+.footer-inner{
+    overflow:hidden; /* Contener floats si se cambian */
+}
+
+.footer-col{
+    float:left;
+    width:25%;
+    padding:8px;
+    /* background-color: rgb(51, 51, 51) */
+}
+
+.footer-col h4{
+    color:var(--morado);
+    margin-bottom:12px;
+}
+
+
+/* BOTTOM BAR ----------------------------------------------------- */
+.bottom-bar{
+    padding:20px 0;
+    font-size:14px;
+    text-align:center;
+    color:#666;
+}
+
+/* Corrección STEPS */
+.steps .row-inner > div:first-child {
+    float:left;
+    width:45%;
+    text-align:center;
+}
+
+.steps .row-inner .right {
+    float:right;
+    width:55%;
+    text-align:left;
+}
+
+img {
+    border-radius: 10%;
+}
