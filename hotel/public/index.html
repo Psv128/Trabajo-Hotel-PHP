@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+	<meta charset="UTF-8">
+	<title>API Hotel - Test</title>
+	<link rel="stylesheet" href="css/index.css">
+</head>
+
+<body>
+
+<div class="container anim-hidden" id="main-container">
+	<div class="header-row">
+		<h2>API Hotel — Panel rápido</h2>
+		<div class="controls">
+			<button class="button-ghost" onclick="logout()">Logout</button>
+			<button class="button-primary" onclick="location.href='index2.html'">Volver a inicio</button>
+		</div>
+	</div>
+
+	<h2>Login</h2>
+	<div class="form-grid">
+		<div class="field">
+			<label>Email</label>
+			<input id="email" placeholder="Email">
+		</div>
+		<div class="field">
+			<label>Contraseña</label>
+			<input id="password" type="password" placeholder="Contraseña">
+		</div>
+		<div class="full">
+			<button class="button-primary" onclick="login()">Login</button>
+		</div>
+	</div>
+
+	<hr class="anim-hidden">
+	<h2 class="anim-hidden">Comprobar disponibilidad</h2>
+	<input id="disp_inicio" type="date">
+	<input id="disp_fin" type="date">
+	<button class="button-primary" onclick="disponibilidad()">Comprobar</button>
+
+	<hr class="anim-hidden">
+	<h2 class="anim-hidden">Mis reservas</h2>
+	<button class="button-ghost" onclick="listar()">Listar reservas</button>
+
+	<hr class="anim-hidden">
+	<h2 class="anim-hidden">Crear reserva</h2>
+	<div class="form-grid">
+		<div class="field">
+			<label>Nombre</label>
+			<input id="nombre" placeholder="Nombre">
+		</div>
+		<div class="field">
+			<label>Apellidos</label>
+			<input id="apellidos" placeholder="Apellidos">
+		</div>
+		<div class="field">
+			<label>Habitaciones</label>
+			<input id="habitaciones" type="number" placeholder="Habitaciones">
+		</div>
+		<div class="field">
+			<label>Inicio</label>
+			<input id="inicio" type="date">
+		</div>
+		<div class="field">
+			<label>Fin</label>
+			<input id="fin" type="date">
+		</div>
+		<div class="full">
+			<button class="button-primary" onclick="crear()">Crear</button>
+		</div>
+	</div>
+
+	<hr class="anim-hidden">
+	<h2 class="anim-hidden">Actualizar reserva</h2>
+	<div class="form-grid">
+		<div class="field">
+			<label>ID reserva</label>
+			<input id="upd_id" placeholder="ID reserva">
+		</div>
+		<div class="field">
+			<label>Nuevo inicio</label>
+			<input id="upd_inicio" type="date">
+		</div>
+		<div class="field">
+			<label>Nueva salida</label>
+			<input id="upd_fin" type="date">
+		</div>
+		<div class="full">
+			<button class="button-ghost" onclick="actualizar()">Actualizar</button>
+		</div>
+	</div>
+
+	<hr class="anim-hidden">
+	<h2 class="anim-hidden">Cancelar reserva</h2>
+	<div class="form-grid">
+		<div class="field">
+			<label>ID reserva</label>
+			<input id="del_id" placeholder="ID reserva">
+		</div>
+		<div class="full">
+			<button class="button-ghost" onclick="borrar()">Cancelar</button>
+		</div>
+	</div>
+
+	<hr>
+
+	<pre id="resultado" class="anim-hidden"></pre>
+
+</div>
+
+	<script>
+		let token = null;
+
+		function login() {
+			fetch('/hotel/api/index.php/login', {
+				method: 'POST',
+				headers: { 'Content-Type': 'application/json' },
+				body: JSON.stringify({
+					email: email.value,
+					password: password.value
+				})
+			})
+				.then(r => r.json())
+				.then(d => {
+					token = d.token;
+					mostrar(d);
+				});
+		}
+
+		function listar() {
+			fetch('/hotel/api/index.php/reservas', {
+				headers: { 'Authorization': 'Bearer ' + token }
+			})
+				.then(r => r.json())
+				.then(mostrar);
+		}
+
+		function disponibilidad() {
+			fetch('/hotel/api/index.php/disponibilidad?inicio=' + disp_inicio.value + '&fin=' + disp_fin.value)
+				.then(r => r.json())
+				.then(mostrar);
+		}
+
+		function crear() {
+			fetch('/hotel/api/index.php/reservas', {
+				method: 'POST',
+				headers: {
+					'Content-Type': 'application/json',
+					'Authorization': 'Bearer ' + token
+				},
+				body: JSON.stringify({
+					nombre: nombre.value,
+					apellidos: apellidos.value,
+					numero_habitaciones: habitaciones.value,
+					fecha_inicio: inicio.value,
+					fecha_salida: fin.value
+				})
+			})
+				.then(r => r.json())
+				.then(mostrar);
+		}
+
+		function actualizar() {
+			fetch('/hotel/api/index.php/reservas?id=' + upd_id.value, {
+				method: 'PUT',
+				headers: {
+					'Content-Type': 'application/json',
+					'Authorization': 'Bearer ' + token
+				},
+				body: JSON.stringify({
+					fecha_inicio: upd_inicio.value,
+					fecha_salida: upd_fin.value
+				})
+			})
+				.then(r => r.json())
+				.then(mostrar);
+		}
+
+		function borrar() {
+			fetch('/hotel/api/index.php/reservas?id=' + del_id.value, {
+				method: 'DELETE',
+				headers: { 'Authorization': 'Bearer ' + token }
+			})
+				.then(r => r.json())
+				.then(mostrar);
+		}
+
+		function logout() {
+			token = null;
+			alert("Sesión cerrada");
+		}
+	</script>
+	<script src="js/index-anim.js"></script>
+
+</body>
+
+</html>

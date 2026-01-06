@@ -1,0 +1,61 @@
+CREATE DATABASE IF NOT EXISTS hotel
+  CHARACTER SET utf8mb4
+  COLLATE utf8mb4_unicode_ci;
+
+USE hotel;
+
+CREATE TABLE reservas (
+    id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+
+    -- Datos del cliente
+    nombre VARCHAR(100) NOT NULL,
+    apellidos VARCHAR(150) NOT NULL,
+
+    -- Datos de la reserva
+    numero_habitaciones TINYINT UNSIGNED NOT NULL,
+    fecha_inicio DATE NOT NULL,
+    fecha_salida DATE NOT NULL,
+
+    -- Usuario que creó la reserva (admin o agencia)
+    id_creador INT UNSIGNED NOT NULL,
+
+    -- Metadatos
+    fecha_creacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+
+    -- Índices y relaciones
+    CONSTRAINT chk_fechas CHECK (fecha_salida > fecha_inicio)
+) ENGINE=InnoDB;
+
+CREATE TABLE usuarios (
+    id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    email VARCHAR(100) UNIQUE NOT NULL,
+    password VARCHAR(255) NOT NULL,
+    rol ENUM('admin', 'agencia') NOT NULL,
+    fecha_creacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB;
+
+ALTER TABLE reservas
+ADD CONSTRAINT fk_reservas_creador
+FOREIGN KEY (id_creador) REFERENCES usuarios(id)
+ON DELETE RESTRICT
+ON UPDATE CASCADE;
+
+CREATE TABLE disponibilidad_mensual (
+    id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    anio SMALLINT NOT NULL,
+    mes TINYINT NOT NULL,
+    reservas_actuales TINYINT UNSIGNED NOT NULL DEFAULT 0,
+    reservas_maximas TINYINT UNSIGNED NOT NULL DEFAULT 10,
+
+    UNIQUE KEY uk_anio_mes (anio, mes)
+) ENGINE=InnoDB;
+
+INSERT INTO disponibilidad_mensual (anio, mes)
+VALUES
+(2026,1),(2026,2),(2026,3),(2026,4),
+(2026,5),(2026,6),(2026,7),(2026,8),
+(2026,9),(2026,10),(2026,11),(2026,12);
+
+CREATE USER 'hotel'@'localhost' IDENTIFIED BY 'hotel';
+GRANT ALL PRIVILEGES ON hotel.* TO 'hotel'@'localhost';
+FLUSH PRIVILEGES;
